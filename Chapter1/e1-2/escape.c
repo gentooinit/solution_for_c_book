@@ -21,7 +21,7 @@ int main()
 	printf("<start> is the start of escape sequences\n");
 	printf("<end> is the end of escape sequences\n\n");
 
-	/* \n is listed above the Exercise 1-2 */
+	/* \n, \t, \b, \", \\ are listed above the Exercise 1-2 */
 	printf("Newline(NL/LF):<start>\n<end>\n");
 	printf("Horizontal tab(HT):<start>\t<end>\n");
 	printf("Vertical tab(VT):<start>\v<end>\n");
