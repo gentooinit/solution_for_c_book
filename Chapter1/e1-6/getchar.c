@@ -24,9 +24,9 @@ int main()
 	 * 
 	 *
 	 * In English:
-	 * On Linux, Ctrl+D at the beginning of line emits a EOF.
+	 * On Linux, Ctrl+D at the beginning of line emits EOF.
 	 * On Windows, Ctrl+Z at the beginning of line, then hit ENTER, 
-	 * that emits a EOF.
+	 * that emits EOF.
 	 *
 	 * Press Ctrl+C to kill the process.
 	 */
