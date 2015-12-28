@@ -23,11 +23,9 @@ int main()
 	while ((c = getchar()) != EOF) {
 		if (c == ' ')
 			++blank_cnt;
-		
-		if (c == '\t')
+		else if (c == '\t')
 			++tab_cnt;
-
-		if (c == '\n')
+		else if (c == '\n')
 			++newline_cnt;
 	}
 
