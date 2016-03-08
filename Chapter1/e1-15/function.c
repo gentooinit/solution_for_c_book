@@ -37,3 +37,4 @@ int fahr2celsius(int fahr)
 {
 	return 5 * (fahr - 32) / 9;
 }
+
