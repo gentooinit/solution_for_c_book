@@ -20,7 +20,7 @@
 int getline(char line[], int maxline);
 void remove_trailing(char s[]);
 
-/* print longer than 80 characters input line */
+/* Remove trailing blanks and tabs */
 int main()
 {
 	int len;        /* current line length */
