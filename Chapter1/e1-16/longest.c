@@ -10,8 +10,12 @@
  *
  */
 #include <stdio.h>
+#ifdef __USE_XOPEN2K8
+#warning "getline() maybe conflicts with stdio.h, try to compile with -ansi or -std=c89/c90/c99."
+#endif
+
 #include <string.h>
-#define MAXLINE 20    /* maximum input line size */
+#define MAXLINE 80    /* maximum input line size */
 
 /* Compile with -ansi option */
 int getline(char line[], int maxline);
@@ -21,22 +25,48 @@ void copy(char to[], char from[]);
 int main()
 {
 	int len;        /* current line length */
+	int prev_len;   /* previous line length */
 	int max;        /* maximum length seen so far */
 	char line[MAXLINE];    /* current input line */
 	char longest[MAXLINE]; /* longest line saved here */
+	char longest_possibly[MAXLINE];  /*  maybe the longest line */
 
 	max = 0;
-	while ((len = getline(line, MAXLINE)) > 0)
-		if (len > max) {
-			max = len;
-			copy(longest, line);
-		}
+	prev_len = 0;
+	while ((len = getline(line, MAXLINE)) > 0) {
+		if (line[strlen(line) - 1] == '\n') {
+			/* a completed line */
+			len += prev_len;
 
-	if (max > 0)        /* there was a line */
+			if (len > max) {
+				max = len;
+
+				/* Now we sure the longest_possibly is the longest line */
+				if (prev_len > 0)
+					copy(longest, longest_possibly);
+				else
+					copy(longest, line);
+			}
+
+			prev_len = 0;
+		} else {
+			/* a parted line */
+
+			/* do not copy if there is a parted line before */
+			if (prev_len == 0)
+				copy(longest_possibly, line);
+
+			prev_len += len;
+		}
+	}
+
+	/* there was a line */
+	if (max > 0) {
 		printf("%s", longest);
 
-	if (longest[strlen(longest) - 1] != '\n')
-		printf("%c", '\n');
+		if (longest[strlen(longest) - 1] != '\n')
+			printf("%c", '\n');
+	}
 
 	return 0;
 }
@@ -46,16 +76,8 @@ int getline(char s[], int lim)
 {
 	int c, i;
 
-	for (i = 0; (c = getchar()) != EOF && c != '\n'; ++i) {
-		if (i < lim - 1) {
+	for (i = 0; i < lim - 1 && (c = getchar()) != EOF && c != '\n'; ++i)
 			s[i] = c;
-		} else {
-			s[i++] = c;
-			s[i] = '\0';
-			return i;
-		}
-
-	}
 
 	if (c == '\n') {
 		s[i] = c;
