@@ -1,11 +1,11 @@
 /*
- * File name: remove_trailing_blanks.c
+ * File name: reverse.c
  *
  * A solution to K&R The C Programming Language:
  *
  * Page 31
- * Exercise 1-18. Write a program to remove trailing blanks and tabs from each
- * line of input, and to delete entirely blank lines.
+ * Exercise 1-19. Write a function reverse(s) that reverse the character string
+ * s. Use it to write a program that reverses its input a line at a time.
  *
  */
 #include <stdio.h>
@@ -13,22 +13,20 @@
 #warning "getline() maybe conflicts with stdio.h, try to compile with -ansi or -std=c89/c90/c99."
 #endif
 
-#include <ctype.h>
 #define MAXLINE 128    /* maximum input line size */
 
 /* Compile with -ansi option */
 int getline(char line[], int maxline);
-void remove_trailing(char s[]);
+void reverse(char s[]);
 
-/* Remove trailing blanks and tabs */
+/* Reverse the character of lines */
 int main()
 {
 	char line[MAXLINE];    /* current input line */
 
 	while (getline(line, MAXLINE) > 0) {
-		remove_trailing(line);
-		if (line[0] != '\0')
-			printf("%s\n", line);
+		reverse(line);
+		printf("%s", line);
 	}
 
 	return 0;
@@ -51,27 +49,19 @@ int getline(char s[], int lim)
 	return i;
 }
 
-void remove_trailing(char s[])
+void reverse(char s[])
 {
-	char *end;
+	int i, j;
+	char tmp;
 
-	end = s;
-	while (*s) {
-		/*
-		 * The question demands to remove trailing blanks,
-		 * but I think '\n', '\v', '\f', '\r' are also included.
-		 * 
-		 */
-		if (!isspace(*s))
-			end += s - end;
+	for (i = 0; s[i] != '\0' && s[i] != '\n'; ++i)
+		;
 
-		++s;
+	j = i - 1;
+	for (i = 0; i < j; ++i, --j) {
+		tmp = s[i];
+		s[i] = s[j];
+		s[j] = tmp;
 	}
-
-	/* remove entirely blank line */
-	if (!isspace(*end))
-		++end;
-
-	*end = '\0';
 }
 
