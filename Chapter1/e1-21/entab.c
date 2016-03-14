@@ -25,12 +25,8 @@ int main(void)
 	count = 0;
 	blank_count = 0;
 	while ((c = getchar()) != EOF) {
-		if (c == '\n') {
-			count = 0;
-			blank_count = 0;
-		} else if (c != '\t') {
+		if (c != '\t')
 			++count;
-		}
 
 		if (c == ' ')
 			++blank_count;
@@ -48,6 +44,11 @@ int main(void)
 				putchar(' ');
 
 			putchar(c);
+
+			if (c == '\n') {
+				count = 0;
+				blank_count = 0;
+			}
 		}
 		
 		count %= NTAB;
