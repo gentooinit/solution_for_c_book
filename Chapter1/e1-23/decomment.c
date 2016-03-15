@@ -48,12 +48,13 @@ int main(void)
 			}
 			break;
 		case ESCAPE:
-			putchar(c);
 			state = state_bak;
+			putchar(c);
 			break;
 		case CHAR_CONST_OPEN:
 			state_bak = CHAR_CONST_OPEN;
 			putchar(c);
+
 			if (c == '\'')
 				state = NORMAL;
 			else if (c == '\\')
@@ -67,8 +68,8 @@ int main(void)
 			 * but no matter what c is,
 			 * state switchs to NORMAL
 			 */
-			putchar(c);
 			state = NORMAL;
+			putchar(c);
 			break;
 		case COMMENT_ENTER:
 			if (c == '*') {
@@ -76,9 +77,9 @@ int main(void)
 			} else if (c == '/') {
 				state = COMMENT_CXX_IN;
 			} else {
+				state = NORMAL;
 				putchar('/');
 				putchar(c);
-				state = NORMAL;
 			}
 			break;
 		case COMMENT_IN:
@@ -87,8 +88,8 @@ int main(void)
 			break;
 		case COMMENT_CXX_IN:
 			if (c == '\n') {
-				putchar(c);
 				state = NORMAL;
+				putchar(c);
 			}
 			break;
 		case COMMENT_EXIT:
