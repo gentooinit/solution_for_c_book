@@ -14,20 +14,20 @@
 #include <limits.h>
 #include <float.h>
 
-#define MIN_SIGNED(x) (1 << (8 * sizeof(x) - 1))
-#define MAX_SIGNED(x) (~MIN_SIGNED(x))
-#define MIN_UNSIGNED(x) 0
-#define MAX_UNSIGNED(x) (~MIN_UNSIGNED(x))
+#define MAX_UNSIGNED(x) ((x)~MIN_UNSIGNED(x))
+#define MIN_UNSIGNED(x) ((x)0)
+#define MAX_SIGNED(x) ((unsigned x)~0 >> 1)
+#define MIN_SIGNED(x) (MAX_SIGNED(x) + 1)
 
 int main()
 {
-	printf("signed char: %hhd~%hhd\n", MIN_SIGNED(signed char), MAX_SIGNED(signed char));
+	printf("signed char: %hhd~%hhd\n", MIN_SIGNED(char), MAX_SIGNED(char));
 	printf("unsigned char: %hhu~%hhu\n", MIN_UNSIGNED(unsigned char), MAX_UNSIGNED(unsigned char));
-	printf("signed short: %hd~%hd\n", MIN_SIGNED(signed short), MAX_SIGNED(signed short));
+	printf("signed short: %hd~%hd\n", MIN_SIGNED(short), MAX_SIGNED(short));
 	printf("unsigned short: %hu~%hu\n", MIN_UNSIGNED(unsigned short), MAX_UNSIGNED(unsigned short));
-	printf("signed int: %d~%d\n", MIN_SIGNED(signed int), MAX_SIGNED(signed int));
+	printf("signed int: %d~%d\n", MIN_SIGNED(int), MAX_SIGNED(int));
 	printf("unsigned int: %u~%u\n", MIN_UNSIGNED(unsigned int), MAX_UNSIGNED(unsigned int));
-	printf("signed long: %ld~%ld\n", MIN_SIGNED(signed long), MAX_SIGNED(signed long));
+	printf("signed long: %ld~%ld\n", MIN_SIGNED(long), MAX_SIGNED(long));
 	printf("unsigned long: %lu~%lu\n", MIN_UNSIGNED(unsigned long), MAX_UNSIGNED(unsigned long));
 
 	//TODO: float
