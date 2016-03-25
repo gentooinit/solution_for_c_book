@@ -30,8 +30,20 @@ int main()
 	printf("signed long: %ld~%ld\n", MIN_SIGNED(long), MAX_SIGNED(long));
 	printf("unsigned long: %lu~%lu\n", MIN_UNSIGNED(unsigned long), MAX_UNSIGNED(unsigned long));
 
-	//TODO: float
+	
+	/* from header */
+	printf("--------------------from header--------------------\n");
+	printf("signed char: %hhd~%hhd\n", CHAR_MIN, CHAR_MAX);
+	printf("unsigned char: %hhu~%hhu\n", 0, UCHAR_MAX);
+	printf("signed short: %hd~%hd\n", SHRT_MIN, SHRT_MAX);
+	printf("unsigned short: %hu~%hu\n", 0, USHRT_MAX);
+	printf("signed int: %d~%d\n", INT_MIN, INT_MAX);
+	printf("unsigned int: %u~%u\n", 0, UINT_MAX);
+	printf("signed long: %ld~%ld\n", LONG_MIN, LONG_MAX);
+	printf("unsigned long: %lu~%lu\n", 0, ULONG_MAX);
 
+	printf("float: %g~%g\n", FLT_MIN, FLT_MAX);
+	printf("double: %g~%g\n", DBL_MIN, DBL_MAX);
 	return 0;
 }
 
