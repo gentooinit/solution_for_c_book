@@ -33,7 +33,7 @@ int main()
 	
 	/* from header */
 	printf("--------------------from header--------------------\n");
-	printf("signed char: %hhd~%hhd\n", CHAR_MIN, CHAR_MAX);
+	printf("signed char: %hhd~%hhd\n", SCHAR_MIN, SCHAR_MAX);
 	printf("unsigned char: %hhu~%hhu\n", 0, UCHAR_MAX);
 	printf("signed short: %hd~%hd\n", SHRT_MIN, SHRT_MAX);
 	printf("unsigned short: %hu~%hu\n", 0, USHRT_MAX);
