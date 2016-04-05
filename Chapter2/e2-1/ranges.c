@@ -21,15 +21,15 @@
 #define MIN_SIGNED(x) (MAX_SIGNED(x) + 1)
 
 #define MAX_NORMALIZED_FLT(exp, frac) (\
-	(0lu << ((exp) + (frac))) |                       /* positive sign*/ \
-	((((1lu << (exp)) - 1) & ~1lu) << (frac)) |       /* max exp */ \
-	((1lu << (frac)) - 1)                             /* max frac */ \
+	(UINT64_C(0) << ((exp) + (frac))) |                        /* positive sign*/ \
+	((((UINT64_C(1) << (exp)) - 1) & ~UINT64_C(1)) << (frac)) |/* max exp */ \
+	((UINT64_C(1) << (frac)) - 1)                              /* max frac */ \
 )
 
 #define MIN_NORMALIZED_FLT(exp, frac) (\
-	(0lu << ((exp) + (frac))) |                       /* positive sign */ \
-	(1lu << (frac))  |                                /* min exp */ \
-	0lu                                               /* min frac */ \
+	(UINT64_C(0) << ((exp) + (frac))) |                        /* positive sign */ \
+	(UINT64_C(1) << (frac))  |                                 /* min exp */ \
+	UINT64_C(0)                                                /* min frac */ \
 )
 
 int main()
